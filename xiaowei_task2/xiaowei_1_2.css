@@ -1,0 +1,280 @@
+/*reset*/
+*{
+    font-family: "Microsoft YaHei UI";
+}
+
+body{
+    width: 1086px;
+    margin: auto;
+    background-color: #DEDEDE;
+}
+
+/*header*/
+
+header {
+    margin: 0;
+    padding: 0;
+    height: 80px;
+    background-color: #333;
+}
+
+header .brand {
+    height: 70px;
+    margin-top: 5px;
+    margin-left: 40px;
+}
+
+header .nav-link {
+    margin-top:auto;
+    float: right;
+    margin-right: 30px;
+    height: 80px;
+    line-height: 80px;
+}
+
+header .nav-link li {
+    float: left;
+    margin-left: 25px;
+}
+
+.nav-link li a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.nav-link li a.active, .nav-link li a:hover {
+    color: #A9AEB4;
+}
+
+/*article*/
+
+article{
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow:  0 2px 0 #6e7176;
+}
+
+article h2{
+    font-size: 20px;
+    color: #6E7176;
+}
+article .writer-info{
+    color: #6E7176;
+}
+article p{
+    text-indent: 2em;
+}
+article img{
+    width: 400px;
+    height: 250px;
+}
+
+.no-list{
+    list-style: none;
+}
+
+.img-list .img-item {
+    width: 132px;
+    height: 132px;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border: 1px solid #cdcdcd;
+    margin-top: 20px;
+}
+
+.img-list .img-item p{
+    text-indent: 0;
+    text-align: center;
+    margin: 5px;
+}
+
+.img-list .img-item img{
+    width: 110px;
+    height: 80px;
+}
+
+table{
+    width: 100%;
+    /*border-right: solid 1px #cdcdcd;*/
+    /*border-left: solid 1px #cdcdcd;*/
+}
+table th{
+    background-color: #333333;
+    color: #ffffff;
+}
+
+table td{
+    border-bottom: solid 1px #cdcdcd;
+}
+table tr:last-child td {
+    border:0;
+    background-color: #cccccc;
+}
+table a{
+    text-decoration: none;
+}
+th{
+    text-align: left;
+}
+th,td{
+    border-right:solid 1px #cdcdcd;
+    padding:0;
+    text-indent: 0.5em;
+}
+
+aside{
+    padding: 20px;
+    background-color: #fff;
+    box-shadow:  0 2px 0 #6e7176;
+    /*height: 600px;*/
+}
+
+aside .aside-header{
+    height: 50px;
+    border-left: solid 4px #cdcdcd;
+}
+aside .aside-header h3{
+    margin-top: auto;
+    text-indent: 1em;
+    line-height: 50px;
+}
+
+aside form{
+    width: 100%;
+    /*padding: 20px;*/
+}
+.form-group{
+    float: right;
+    margin-bottom: 10px;
+    margin-right: 500px;
+}
+.form-group label{
+    margin-right: 10px;
+}
+
+form .info{
+    clear: both;
+    color: #AFB4B8;
+    margin-left: 398px;
+ }
+
+form .radio{
+    margin-right: 565px;
+    position: relative;
+}
+.radio label{
+    margin-right: 5px;
+    position: relative;
+}
+.radio input{
+    opacity: 0;
+}
+
+.radio input+i{
+    box-sizing: border-box;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    right: 18px;
+    top: 4px;
+    background-color: #fff;
+    border: solid 1px #6E7176;
+}
+
+.radio input:checked+i{
+    border: solid 6px #399BFD;
+}
+
+
+.selector{
+    margin-right: 592px;
+}
+
+.selector select{
+	-moz-appearance:none;
+    -webkit-appearance:none;
+    height: 22px;
+    width: 55px;
+    line-height: 22px;
+    border-radius: 4px;
+    padding-left: 10px;
+    border: solid 1px #cccccc;
+}
+
+.checkbox{
+    margin-right: 453px;
+    position: relative;
+}
+
+.checkbox input{
+    opacity: 0;
+    /*position: relative;*/
+}
+
+.checkbox label{
+    position: relative;
+}
+.checkbox input+i{
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 3px;
+    border: solid 1px #cdcdcd;
+    background-color: #ffffff;
+    position: absolute;
+    top: 4px;
+    right: 35px;
+}
+
+
+
+.checkbox input:checked+i:after{
+    content: '\2714';
+    position: absolute;
+    left: -2px;
+    top: -6px;
+}
+
+.text-area{
+    margin-right: 60px;
+}
+
+.text-area label{
+    float: left;
+    display: block;
+}
+
+.text-area textarea{
+    width: 585px;
+    height: 90px;
+    border: solid 1px #cdcdcd;
+}
+
+form .btn-sub{
+    margin: 0 5%;
+    padding: 0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 40px;
+    height: 40px;
+    width: 90%;
+    border-radius: 10px;
+    background-color: #3355D0;
+}
+
+
+/* footer */
+footer{
+    height: 50px;
+    background-color: #333333;
+}
+
+footer p{
+    color: #ffffff;
+    text-align: center;
+    line-height: 50px;
+}
