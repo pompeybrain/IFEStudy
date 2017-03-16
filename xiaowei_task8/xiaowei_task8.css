@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*类名已col-开头的*/
+[class*="col-"] {
+    height: 50px;
+    margin: 10px;
+    background-color: #eeeeee;
+    border: solid 1px #999999;
+    /*display: inline-block;*/
+    box-sizing: border-box;
+    float: left;
+}
+
+body {
+    padding: 10px;
+    text-align: center;
+}
+
+.row {
+    margin: auto;
+    display: block;
+    overflow: auto;
+}
+
+/* 大于768*/
+@media screen and (min-width: 769px) {
+    .row {
+        width: 769px;
+    }
+
+    .col-1 {
+        width: 42px;
+    }
+
+    .col-2 {
+        width: 104px;
+    }
+
+    .col-3 {
+        width: 166px;
+    }
+
+    .col-4 {
+        width: 228px;
+    }
+
+    .col-6 {
+        width: 352px;
+    }
+
+    .col-8 {
+        width: 476px;
+    }
+
+    .col-12 {
+        width: 724px;
+    }
+
+}
+
+/*小于768*/
+@media screen and (max-width: 768px) {
+    .row {
+        width: 600px;
+    }
+
+    .col-1 {
+        width: 30px;
+    }
+
+    .col-2 {
+        width: 80px;
+    }
+
+    .col-3 {
+        width: 130px;
+    }
+
+    .col-4 {
+        width: 180px;
+    }
+
+    .col-6 {
+        width: 280px;
+    }
+
+    .col-8 {
+        width: 380px;
+    }
+
+    .col-12 {
+        width: 580px;
+    }
+
+}
