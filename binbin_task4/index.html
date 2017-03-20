@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务四队列</title>
+    <style>
+        .container {
+            margin-left: 20px;
+            width: 500px;
+        }
+
+        ul {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        li {
+            display: block;
+            float: left;
+            width: 40px;
+            height: 20px;
+            text-align: center;
+            margin-left: 10px;
+            background-color: darkred;
+            color: #ffffff;
+
+        }
+    </style>
+</head>
+<body>
+<input type="text">
+<button id="left-push">左侧入</button>
+<button id="right-push">右侧入</button>
+<button id="left-pop">左侧出</button>
+<button id="right-pop">右侧出</button>
+<div class="container">
+    <ul id="list">
+    </ul>
+</div>
+<script src="queue.js"></script>
+</body>
+</html>
