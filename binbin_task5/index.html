@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务五排序</title>
+    <style>
+        input {
+            margin-left: 500px;
+            margin-bottom: 50px;
+        }
+
+        .container {
+            margin: auto;
+            width: 600px;
+            height: 300px;
+            border: solid 1px #000;
+        }
+
+        ul {
+            width: 600px;
+            height: 300px;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: flex-end;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: block;
+            width: 8px;
+            height: 10px;
+            margin: 0 1px;
+            text-align: center;
+            background-color: darkred;
+            color: #ffffff;
+
+        }
+    </style>
+</head>
+<body>
+
+<input type="text">
+<button id="left-push">左侧入</button>
+<button id="right-push">右侧入</button>
+<button id="left-pop">左侧出</button>
+<button id="right-pop">右侧出</button>
+<button id="bubble-sort">冒泡排序</button>
+<div class="container">
+    <ul id="list">
+        <!--li{23}*60-->
+    </ul>
+</div>
+<script src="sort.js"></script>
+</body>
+</html>
