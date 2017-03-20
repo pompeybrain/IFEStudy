@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务四队列</title>
+    <style>
+        .container {
+            margin-left: 20px;
+            width: 500px;
+        }
+
+        #input-text {
+            width: 200px;
+            height: 100px;
+        }
+
+        ul {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        li {
+            display: block;
+            float: left;
+            width: 60px;
+            height: 20px;
+            text-align: center;
+            margin-left: 10px;
+            background-color: darkred;
+            color: #ffffff;
+
+        }
+    </style>
+</head>
+<body>
+<textarea id="input-text"></textarea>
+<button id="left-push">左侧入</button>
+<button id="right-push">右侧入</button>
+<button id="left-pop">左侧出</button>
+<button id="right-pop">右侧出</button>
+<div class="container">
+    <ul id="list">
+    </ul>
+</div>
+<input type="text" id="search-text">
+<button id="search-btn">查询</button>
+<script src="search.js"></script>
+</body>
+</html>
