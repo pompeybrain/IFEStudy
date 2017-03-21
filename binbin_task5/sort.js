@@ -13,7 +13,7 @@ window.onload = function () {
     // data = Array.from(lis, li => li.innerHTML);
 
     //校验是否输入数字
-    function checkNum(num) {
+    function checkNum (num) {
         if (num == '') {
             return false;
         } else if (Number.isNaN(Number(num))) {
@@ -25,7 +25,7 @@ window.onload = function () {
     }
 
     //获取输入的数据
-    function getInput() {
+    function getInput () {
         if (data.length > 60) {
             throw new Error('Li的数量超过60个了');
         }
@@ -38,7 +38,7 @@ window.onload = function () {
         }
     }
 
-    function render(data) {
+    function render (data) {
         list.innerHTML = '';//清空原li
         data.map(dataCell => {
             let liItem = document.createElement('li');
@@ -97,25 +97,43 @@ window.onload = function () {
 
     //冒泡排序
     document.getElementById('bubble-sort').addEventListener('click', function () {
-            let lis = [...list.children];
-            let time = 0;//计数
-            for (let i = data.length; i > 1; i--) {
-                for (let j = 0; j < i - 1; j++) {
-                    time++;
-                    (function (i, j, time) {
-                        setTimeout(function () {
-                            if (data[j] > data[j + 1]) {
-                                let temp = data[j];
-                                data[j] = data[j + 1];
-                                data[j + 1] = temp;
-                                render(data);
-                            }
-                        }, time * 300);
-                    })(i, j, time);
-                }
+        let lis = [...list.children];
+        let time = 0;//计数
+        for (let i = data.length; i > 1; i--) {
+            for (let j = 0; j < i - 1; j++) {
+                (function (i, j, time) {
+                    setTimeout(function () {
+                        if (data[j] > data[j + 1]) {
+                            let temp = data[j];
+                            data[j] = data[j + 1];
+                            data[j + 1] = temp;
+                            render(data);
+                        }
+                    }, time * 300);
+                })(i, j, time);
+                time++;
             }
         }
-    );
+    });
+    //插入排序
+    document.getElementById('insert-sort').addEventListener('click', function () {
+        let time = 0;//计数
+        for (let i = 1; i < data.length; i++) {
+            for (let j = i; j > 0; j--) {
+                (function (i, j, time) {
+                    setTimeout(function () {
+                        if (data[j] < data[j - 1]) {
+                            let temp = data[j];
+                            data[j] = data[j - 1];
+                            data[j - 1] = temp;
+                            render(data);
+                        }
+                    }, time * 400);
+                })(i, j, time);
+                time++
+            }
+        }
+    });
 };
 // //理解setTimeout
 // (function () {
