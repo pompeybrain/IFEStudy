@@ -95,6 +95,31 @@ window.onload = function () {
 
     });
 
+
+    //选择排序
+    document.getElementById('select-sort').addEventListener('click', function () {
+        let time = 0;
+        for (let i = 0; i < data.length - 1; i++) {
+            (function (i, time) {
+                setTimeout(function () {
+                    let minIndex = i;
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (data[j] < data[minIndex]) {
+                            minIndex = j;
+                        }
+                    }
+                    let temp = data[i];
+                    data[i] = data[minIndex];
+                    data[minIndex] = temp;
+                    render(data);
+                }, time * 400);
+            })(i, time);
+            time++;
+            //选择剩下的数中最小的索引
+        }
+    });
+
+
     //冒泡排序
     document.getElementById('bubble-sort').addEventListener('click', function () {
         let lis = [...list.children];
@@ -134,6 +159,67 @@ window.onload = function () {
             }
         }
     });
+
+    function quickSort (arr, left, right) {
+        if (left >= right) {
+            return;
+        }
+        // console.log('quick');
+        let i = left;
+        let j = right;
+        let k = left;
+        for (; i < j;) {
+            // console.log(i);
+            // console.log(j);
+            // console.log(data);
+            let lower = k;
+            let bigger = k;
+            for (; i <= j; i++) {
+                if (data[i] > data[k]) {
+                    bigger = i;
+                    break;
+                }
+            }
+            for (; j >= i; j--) {
+                if (data[j] < data[k]) {
+                    lower = j;
+                    break;
+                }
+            }
+            // console.log('k:', k);
+            // console.log('j:', j);
+            // console.log('lower:', lower);
+            // console.log('i', i);
+            // console.log('bigger', bigger);
+
+            if (lower != bigger && lower != k && bigger != k) {
+                // console.log(bigger);
+                let temp = data[lower];
+                data[lower] = data[bigger];
+                data[bigger] = temp;
+            }
+            // console.log('data:', data);
+        }
+        // console.log('k:', k);
+        // console.log('j:', j);
+        // console.log('lower:', lower);
+        // console.log('i', i);
+        // console.log('bigger', bigger);
+        let temp = data[j];
+        data[j] = data[k];
+        data[k] = temp;
+
+        quickSort(arr, left, j - 1);
+        quickSort(arr, j + 1, right);
+    }
+
+    document.getElementById('quick-sort').addEventListener('click', function () {
+        let time = 0;
+        quickSort(data, 0, data.length - 1);
+        render(data);
+    });
+
+
 };
 // //理解setTimeout
 // (function () {
