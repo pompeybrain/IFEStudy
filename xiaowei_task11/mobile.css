@@ -221,7 +221,7 @@ nav li.active {
 
 .media .descs .desc {
     text-align: center;
-    min-width: 6rem;
+    width: 40%;
     height: 2.5rem;
     line-height: 2.5rem;
     background-color: #f8f8f8;
@@ -235,19 +235,17 @@ nav li.active {
 
 .article img {
     max-height: 6rem;
+    margin-right: 1rem;
 }
 
 .article .article-info {
     display: flex;
-    flex-grow: 1;
-    margin-left: 1.2rem;
     flex-flow: row wrap;
     justify-content: flex-start;
 }
 
 .article .article-info h3 {
     width: 100%;
-    flex-grow: 1;
     font-weight: normal;
 }
 
