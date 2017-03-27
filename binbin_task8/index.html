@@ -1,0 +1,165 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>树的遍历</title>
+</head>
+<style>
+    .btns {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .box {
+        border: solid 1px #000;
+        display: flex;
+        min-width: 30px;
+        min-height: 30px;
+        margin: 10px;
+        justify-content: center;
+        background-color: #fff;
+        flex-flow: wrap;
+    }
+</style>
+<body>
+<div class="btns">
+    <button id="pre-order">前序遍历</button>
+    <div class="search">
+        <input type="text" id="search-text">
+        <button id="search">前序查询</button>
+    </div>
+
+</div>
+<div class="box" id="root-box">
+    Super
+    <div class="box">
+        Car
+        <div class="box">
+            Apple
+            <div class="box">
+                Pear
+            </div>
+            <div class="box">
+                Pig
+            </div>
+            <div class="box">
+                Cola
+            </div>
+            <div class="box">
+                Scala
+            </div>
+        </div>
+
+        <div class="box">
+            Phone
+        </div>
+        <div class="box">
+            <div class="box">
+                Book
+            </div>
+            <div class="box">
+                School
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        Note
+        <div class="box">
+            Human
+            <div class="box">
+                Code
+            </div>
+            <div class="box">Operate</div>
+            <div class="box">Man</div>
+        </div>
+
+        <div class="box">
+            Program
+            <div class="box">
+                Behavior
+                <div class="box">Cat</div>
+            </div>
+            <div class="box">
+                Class
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        Fish
+    </div>
+</div>
+<script>
+    let root = document.getElementById('root-box');
+    let count = 1;
+
+    //前序
+    function preOrderSearch (node, key) {
+        if (node === undefined) {
+            return;
+        }
+
+        (function (node) {
+            setTimeout(function () {
+                node.style.backgroundColor = 'blue';
+            }, count * 1000);
+        })(node);
+
+        if (node.firstChild.nodeValue.trim() === key) {
+            (function (node) {
+                setTimeout(function () {
+                    node.style.backgroundColor = 'red';
+                }, count * 1000 + 250);
+            })(node);
+        } else {
+            (function (node) {
+                setTimeout(function () {
+                    node.style.backgroundColor = '#ffffff';
+                }, count * 1000 + 500);
+            })(node);
+        }
+        count++;
+
+        for (let vNode of node.children) {
+            preOrderSearch(vNode, key);
+        }
+    }
+
+    document.getElementById('pre-order').addEventListener('click', function () {
+        count = 1;
+        preOrderSearch(root);
+    });
+
+    document.getElementById('search').addEventListener('click', function () {
+        let searchText = document.getElementById('search-text').value.trim();
+        console.log('key: ' + searchText);
+        preOrderSearch(root, searchText);
+    });
+
+    //    document.getElementById('post-order').addEventListener('click', function () {
+    //        count = 1;
+    //        postOrder(root);
+    //    });
+    //    function Node (data, left, right) {
+    //        this.data = data;
+    //        this.left = left;
+    //        this.right = right;
+    //    }
+    //    //    let treeArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    //    let root = new Node('A', new Node('B'), new Node('C'));
+    //    console.log(root);
+    //    function preOrder (node) {
+    //        if (node !== null && node !== undefined) {
+    //            console.log(node.data);
+    //            preOrder(node.left);
+    //            preOrder(node.right);
+    //        }
+    //    }
+    //    preOrder(root);
+
+
+</script>
+</body>
+</html>
