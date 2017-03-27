@@ -1,0 +1,178 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>树的遍历</title>
+</head>
+<style>
+    .btns {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .box {
+        border: solid 1px #000;
+        display: flex;
+        min-width: 30px;
+        min-height: 30px;
+        margin: 20px;
+        justify-content: center;
+        background-color: #fff;
+        flex-flow: wrap;
+    }
+</style>
+<body>
+<div class="btns">
+    <button id="pre-order">前序遍历</button>
+    <button id="in-order">中序遍历</button>
+    <button id="post-order">后序遍历</button>
+</div>
+<div class="box" id="root-box">
+    <div class="box">
+        <div class="box">
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box">
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+            <div class="box">
+                <div class="box"></div>
+                <div class="box"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let root = document.getElementById('root-box');
+    let count = 1;
+    //前序
+    function preOrder (node) {
+        if (node === undefined) {
+            return;
+        }
+
+        (function (node) {
+            setTimeout(function () {
+                node.style.backgroundColor = 'blue';
+            }, count * 1000);
+        })(node);
+
+        (function (node) {
+            setTimeout(function () {
+                node.style.backgroundColor = '#ffffff';
+            }, count * 1000 + 500);
+        })(node);
+
+        count++;
+        preOrder(node.children[0]);
+        preOrder(node.children[1]);
+    }
+    //中序
+    function inOrder (node) {
+        if (node === undefined) {
+            return;
+        }
+        inOrder(node.children[0]);
+        (function (node) {
+            setTimeout(function () {
+                node.style.backgroundColor = 'blue';
+            }, count * 1000);
+        })(node);
+
+        (function (node) {
+            setTimeout(function () {
+                node.style.backgroundColor = '#ffffff';
+            }, count * 1000 + 500);
+        })(node);
+        count++;
+
+        inOrder(node.children[1]);
+    }
+    //后序
+    function postOrder (node) {
+        if (node === undefined) {
+            return;
+        }
+        postOrder(node.children[0]);
+        postOrder(node.children[1]);
+        (function (node) {
+            setTimeout(function () {
+                node.style.backgroundColor = 'blue';
+            }, count * 1000);
+        })(node);
+
+        (function (node) {
+            setTimeout(function () {
+                node.style.backgroundColor = '#ffffff';
+            }, count * 1000 + 500);
+        })(node);
+        count++;
+    }
+
+    document.getElementById('pre-order').addEventListener('click', function () {
+        count = 1;
+        preOrder(root);
+    });
+    document.getElementById('in-order').addEventListener('click', function () {
+        count = 1;
+        inOrder(root);
+    });
+    document.getElementById('post-order').addEventListener('click', function () {
+        count = 1;
+        postOrder(root);
+    });
+    //    function Node (data, left, right) {
+    //        this.data = data;
+    //        this.left = left;
+    //        this.right = right;
+    //    }
+    //    //    let treeArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    //    let root = new Node('A', new Node('B'), new Node('C'));
+    //    console.log(root);
+    //    function preOrder (node) {
+    //        if (node !== null && node !== undefined) {
+    //            console.log(node.data);
+    //            preOrder(node.left);
+    //            preOrder(node.right);
+    //        }
+    //    }
+    //    preOrder(root);
+
+
+</script>
+</body>
+</html>
