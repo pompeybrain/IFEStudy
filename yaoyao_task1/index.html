@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单校验</title>
+    <style>
+        #info {
+            margin-left: 37px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<label for="input">名称 </label>
+<input type="text" id="input">
+<button id="validate">验证</button>
+<div id="info">必填，长度为4~16个字符</div>
+</body>
+<script>
+    document.getElementById('validate').addEventListener('click', function () {
+        let msg = '';
+        let input = document.getElementById('input').value.trim();
+        let inputLength = 0;
+        for (let char of input) {
+            if (char.charCodeAt(0) > 255) {
+                inputLength += 2;
+            } else {
+                inputLength++;
+            }
+        }
+        if (inputLength === 0) {
+            msg = '名称不能为空';
+        } else if (inputLength < 4) {
+            msg = '名称不能少于4位';
+        } else if (inputLength <= 16) {
+            msg = '名称格式正确';
+        } else {
+            msg = '名称不能多于16位';
+        }
+        document.getElementById('info').innerHTML = msg;
+    });
+</script>
+</html>
