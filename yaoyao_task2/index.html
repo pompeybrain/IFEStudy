@@ -19,6 +19,16 @@
             display: none;
         }
 
+        #error {
+            color: #de6161;
+            display: block;
+        }
+
+        #right {
+            color: #38ea38;
+            display: block;
+        }
+
         input {
             outline: none;
             border: solid 1px #dddddd;
@@ -98,7 +108,7 @@
         element.className = infoClass;
         let infoDiv = element.parentNode.lastChild.previousSibling;//获得info div
         infoDiv.innerHTML = infoMsg;
-        infoDiv.style.display = 'block';
+        infoDiv.id = infoClass;
     }
 
     function validate (inputElement, validateText) {
