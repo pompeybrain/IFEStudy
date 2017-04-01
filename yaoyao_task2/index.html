@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单校验</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .form-group {
+            margin: 10px;
+        }
+
+        .info {
+            margin-left: 37px;
+            font-size: 14px;
+            color: #888;
+            display: none;
+        }
+
+        input {
+            outline: none;
+            border: solid 1px #dddddd;
+            box-shadow: 0 0 2px 1px #dddddd;
+        }
+
+        input:focus {
+            border: solid 1px #2F79BA;
+            box-shadow: 0 0 2px 1px #2F79B0;
+        }
+
+        input.error {
+            border: solid 1px #de6161;
+            box-shadow: 0 0 2px 1px #de6161;
+        }
+
+        input.right {
+            border: solid 1px #38ea38;
+            box-shadow: 0 0 2px 1px #38ea38;
+        }
+
+        input:focus + .info {
+            display: block;
+        }
+
+        #submit {
+            border: none;
+            border-radius: 2px;
+            color: #ffffff;
+            background-color: #2F79BA;
+        }
+    </style>
+</head>
+<body>
+<div style="margin-top: 50px;"></div>
+<form action="" onsubmit="validateAll(event)">
+    <div class="form-group">
+        <label for="name">姓名</label>
+        <input type="text" name="name" id="name">
+        <div class="info">必填，长度为4~16个字符</div>
+    </div>
+    <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" name="password" id="password">
+        <div class="info">必填，长度为6~10个字符，至少包含数字和字母</div>
+    </div>
+    <div class="form-group">
+        <label for="password-confirm">密码确认</label>
+        <input type="password" id="password-confirm">
+        <div class="info">再次输入相同密码</div>
+    </div>
+    <div class="form-group">
+        <label for="email">邮箱</label>
+        <input type="email" name="email" id="email">
+        <div class="info">请输入邮箱地址</div>
+    </div>
+    <div class="form-group">
+        <label for="phone">手机</label>
+        <input type="tel" name="phone" id="phone">
+        <div class="info">请输入手机号</div>
+    </div>
+    <button id="submit" type="submit">提交</button>
+</form>
+</body>
+<script>
+
+    let inputs = document.getElementsByTagName('input');
+    for (let input of inputs) {
+        input.addEventListener('blur', function () {
+            let validateText = input.value.trim();
+            validate(input, validateText);
+        });
+    }
+
+    function info (elementId, infoClass, infoMsg) {
+        let element = document.getElementById(elementId);
+        element.className = infoClass;
+        let infoDiv = element.parentNode.lastChild.previousSibling;//获得info div
+        infoDiv.innerHTML = infoMsg;
+        infoDiv.style.display = 'block';
+    }
+
+    function validate (inputElement, validateText) {
+        let infoClass = 'error';
+        let msg = '';
+        switch (inputElement.id) {
+            case 'name':
+                let strLength = 0;
+                for (let char of validateText) {
+                    if (char.charCodeAt(0) > 255) {
+                        strLength += 2;
+                    } else {
+                        strLength++;
+                    }
+                }
+                if (strLength === 0) {
+                    msg = '名称不能为空';
+                } else if (strLength < 4) {
+                    msg = '名称不能少于4位';
+                } else if (strLength <= 16) {
+                    msg = '名称格式正确';
+                    infoClass = 'right';
+                } else {
+                    msg = '名称不能多于16位';
+                }
+                break;
+            case 'password':
+                if (validateText.length < 6 || validateText.length > 10) {
+                    msg = '密码长度不正确';
+                } else if (validateText.search(/[^A-Za-z0-9]/) !== -1) {//匹配非数字字母的符号
+                    msg = '密码格式错误';
+                } else {
+                    msg = '密码可用';
+                    infoClass = 'right';
+                }
+                break;
+            case 'password-confirm':
+                if (validateText === document.getElementById('password').value) {
+                    msg = '密码输入一致';
+                    infoClass = 'right';
+                } else {
+                    msg = '两次密码输入不一致';
+                }
+                break;
+            case 'email':
+                if (validateText.indexOf('@') < 1 || validateText.lastIndexOf('.') - validateText.indexOf('@') < 2) {
+                    msg = '邮箱格式错误';
+                } else {
+                    msg = '邮箱格式正确';
+                    infoClass = 'right';
+                }
+                break;
+            case 'phone':
+                if ((/^1\d{10}$/).test(validateText)) {//匹配11位数字,1开头
+                    msg = '手机格式正确';
+                    infoClass = 'right';
+                } else {
+                    msg = '手机格式错误';
+                }
+                break;
+            default:
+                break;
+        }
+        info(inputElement.id, infoClass, msg);
+        return infoClass;
+    }
+    function validateAll (event) {
+        event.preventDefault();
+        let inputs = document.getElementsByTagName('input');
+        let res = '';
+        for (let input of inputs) {
+            res += validate(input, input.value);
+        }
+        if (res.search('error') !== -1) {
+            alert('提交失败');
+            return false;
+        }
+        alert('提交成功');
+        return true;
+    }
+
+</script>
+</html>
