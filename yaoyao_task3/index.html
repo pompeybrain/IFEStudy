@@ -1,0 +1,117 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单联动</title>
+    <style>
+        form {
+            display: flex;
+            flex-flow: wrap;
+            text-align: center;
+        }
+
+        .from {
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .radios {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .radios label {
+            margin-right: 50px;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        select {
+            margin-right: 20px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+
+    </style>
+</head>
+<body>
+<form action="">
+    <div class="radios">
+        <input type="radio" name="status" id="student" value="student" checked> <label for="student">在校生</label>
+        <input type="radio" name="status" id="worker" value="worker"> <label for="worker">非在校生</label>
+    </div>
+    <div class="from">
+        <div id="student-group">
+            <label for="city">学校</label>
+            <select name="city" id="city">
+            </select>
+            <select name="school" id="school">
+            </select>
+        </div>
+        <div id="worker-group" class="hide">
+            <label for="unit">就业单位</label>
+            <input type="text" id="unit" name="unit">
+        </div>
+    </div>
+</form>
+</body>
+<script>
+    let citySchool = [
+        {
+            "city": "北京",
+            "school": ["北京大学", "清华大学", "北京科技大学"]
+        },
+        {
+            "city": "南京",
+            "school": ["南京大学", "东南大学", "南京农业大学"]
+        }
+    ];
+
+    window.onload = function () {
+        let radios = document.getElementsByName('status');
+        for (let radio of radios) {
+            radio.onclick = function () {//点击即选中
+                document.querySelector('#student-group').className = 'hide';
+                document.querySelector('#worker-group').className = 'hide';
+                document.querySelector('#' + radio.value + '-group').className = '';
+            }
+        }
+
+
+        let citySelector = document.querySelector('#city');
+        for (let i = 0; i < citySchool.length; i++) {
+            let option = document.createElement('option');
+            option.value = i;
+            option.text = citySchool[i].city;
+            citySelector.add(option);
+        }
+        renderSchool(0);
+
+        //渲染school
+        function renderSchool (index) {
+            let schoolSelectot = document.querySelector('#school');
+            schoolSelectot.innerHTML = '';
+            let schools = citySchool[index].school;
+            for (let i = 0; i < schools.length; i++) {
+                let option = document.createElement('option');
+                option.value = i;
+                option.text = schools[i];
+                schoolSelectot.add(option);
+            }
+        }
+
+        citySelector.onchange = function () {
+            renderSchool(citySelector.selectedIndex);
+        }
+    }
+</script>
+</html>
