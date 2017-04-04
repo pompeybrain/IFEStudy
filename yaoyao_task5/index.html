@@ -1,0 +1,400 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小方块</title>
+    <style>
+        .map {
+            display: flex;
+            flex-flow: row wrap;
+            width: 330px;
+            height: 330px;
+            text-align: center;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .map .row {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            position: relative;
+        }
+
+        .map .row .box {
+            width: 30px;
+        }
+
+        .map .row:first-child .box:not(:first-child) {
+            border-bottom: solid 1px #000000;
+        }
+
+        .map .row:not(:first-child) .box:first-child {
+            border-right: solid 1px #000000;
+        }
+
+        .map .row:last-child .box:not(:first-child) {
+            border-bottom: solid 1px #000000;
+        }
+
+        .map .row:not(:first-child) .box:last-child {
+            border-right: solid 1px #000000;
+        }
+
+        .row:not(:first-child) .box:not(:first-child) {
+            border-right: solid 1px #cccccc;
+            border-bottom: solid 1px #cccccc;
+        }
+
+        .direct {
+            position: absolute;
+            bottom: 150px;
+            left: 680px;
+            display: inline-block;
+        }
+
+        .direct input {
+            height: 26px;
+            width: 150px;
+            line-height: 26px;
+            font-size: 20px;
+
+        }
+
+        .direct button {
+            height: 27px;
+            line-height: 27px;
+            background-color: #cdedfe;
+            border-radius: 3px;
+            border: solid 1px #cccccc;
+        }
+
+        .info-direct {
+            position: absolute;
+            left: 100px;
+        }
+
+        #onBox {
+            background-color: red;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            transition: all 1s linear;
+        }
+
+        #onBox:before {
+            position: absolute;
+            display: block;
+            content: '';
+            height: 8px;
+            width: 30px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="map">
+    <div class="row">
+        <div class="box"></div>
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+        <div class="box">7</div>
+        <div class="box">8</div>
+        <div class="box">9</div>
+        <div class="box">10</div>
+    </div>
+
+
+    <div class="row">
+        <div class="box">1</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">2</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">3</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">4</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">5</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">6</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">7</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">8</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div class="row">
+        <div class="box">9</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div id="onBox" style="left: 120px; top: 120px; transform: rotateZ(0deg);">
+    </div> <!--内联样式存储-->
+    <div class="row">
+        <div class="box">10</div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</div>
+
+
+<div class="info-direct">
+    一个红色正方形在这个空间内，正方形中的蓝色边表示这是他的正面
+    <br>
+    可用指令(忽略大小写)：
+    <ul>
+        <li>GO：向蓝色边所面向的方向前进一格（一格等同于正方形的边长）</li>
+        <li>TUN-LEF：向左转（逆时针旋转90度）</li>
+        <li>TUN-RIG：向右转（顺时针旋转90度）</li>
+        <li>TUN-BAC：向后转（旋转180度）</li>
+        <li>TRA-LEF：向屏幕的左侧移动一格，方向不变</li>
+        <li>TRA-TOP：向屏幕的上面移动一格，方向不变</li>
+        <li>TRA-RIG：向屏幕的右侧移动一格，方向不变</li>
+        <li>TRA-BOT：向屏幕的下面移动一格，方向不变</li>
+        <li>MOV-LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格</li>
+        <li>MOV-TOP：方向转向屏幕上面，向屏幕的上面移动一格</li>
+        <li>MOV-RIG：方向转向屏幕右侧，向屏幕的右侧移动一格</li>
+        <li>MOV-BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
+    </ul>
+</div>
+<div class="direct">
+    <input type="text">
+    <button>执行</button>
+</div>
+<script>
+    let onBox = document.querySelector('#onBox');
+    function forward (direct) {//前进，边界判断
+        let msg = 'success';
+        let deg = (direct === undefined) ? direct : (Number(onBox.getAttribute('style').match(/(-?\d+)deg/)[1]) % 360 + 360) % 360;//取顺时针方向角度值
+        let leftDis = Number(onBox.getAttribute('style').match(/(\d+)px/g)[0].split('px')[0]);
+        let topDis = Number(onBox.getAttribute('style').match(/(\d+)px/g)[1].split('px')[0]);
+        switch (deg) {
+            case 0://上
+                if (topDis <= 30) {
+                    msg = '已经到顶了';
+                } else {
+                    topDis -= 30;
+                    onBox.style.top = topDis + 'px';
+                }
+                break;
+            case 180://下
+                if (topDis >= 300) {
+                    msg = '已经到底了';
+                } else {
+                    topDis += 30;
+                    onBox.style.top = topDis + 'px';
+                }
+                break;
+            case 90://右
+                if (leftDis >= 300) {
+                    msg = '已经到最右边了';
+                } else {
+                    leftDis += 30;
+                    onBox.style.left = leftDis;
+                }
+                break;
+            case 270://左
+                if (leftDis <= 30) {
+                    msg = '已经到最左边了';
+                } else {
+                    leftDis -= 30;
+                    onBox.style.left = leftDis;
+                }
+                break;
+            default:
+                msg = 'wrong deg';
+                break;
+        }
+        return msg;
+    }
+
+    function RotateZ (mockDeg, destDeg) {//逆时针90为-1，顺时针90为1，180为二
+        let newStyle = '';
+        if (destDeg !== undefined) {
+            newStyle = onBox.getAttribute('style').replace(/-?\d+deg/, destDeg + 'deg');
+        } else {
+            let oldDeg = onBox.getAttribute('style').match(/(-?\d+)deg/)[1];
+            let newDeg = (Number(oldDeg) + 90 * mockDeg);
+            newStyle = onBox.getAttribute('style').replace(/-?\d+deg/, newDeg + 'deg');
+        }
+        onBox.setAttribute('style', newStyle);
+    }
+
+    window.onload = function () {
+        document.querySelector('.direct button').onclick = function () {
+            let direct = document.querySelector('.direct input').value.trim().toLowerCase();
+            let resMsg = 'success';
+            switch (direct) {
+                case 'go':
+                    resMsg = forward();
+                    break;
+                case 'tun-lef':
+                    RotateZ(-1);
+                    break;
+                case 'tun-rig':
+                    RotateZ(1);
+                    break;
+                case 'tun-bac':
+                    RotateZ(2);
+                    break;
+                case 'tra-lef':
+                    resMsg = forward(270);
+                    break;
+                case 'tra-top':
+                    resMsg = forward(0);
+                    break;
+                case 'tra-rig':
+                    resMsg = forward(90);
+                    break;
+                case 'tra-bot':
+                    resMsg = forward(180);
+                    break;
+                case 'mov-lef':
+                    resMsg = forward(270);
+                    setTimeout(function () {
+                        RotateZ(null, 270);
+                    }, 1000);
+                    break;
+                case 'mov-top':
+                    RotateZ(null, 0);
+                    setTimeout(function () {
+                        resMsg = forward(0);
+                    }, 1000);
+                    break;
+                case 'mov-rig':
+                    resMsg = forward(90);
+                    setTimeout(function () {
+                        RotateZ(null, 90);
+                    }, 1000);
+                    break;
+                case 'mov-bot':
+                    resMsg = forward(180);
+                    setTimeout(function () {
+                        RotateZ(null, 180);
+                    }, 1000);
+                    break;
+                default:
+                    resMsg = '错误的指令！';
+                    return;
+            }
+            if (resMsg !== 'success') {
+                alert(resMsg);//出错提示
+            }
+        }
+    }
+</script>
+</body>
+</html>
