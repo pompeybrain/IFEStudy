@@ -363,27 +363,27 @@
                     resMsg = forward(180);
                     break;
                 case 'mov-lef':
-                    resMsg = forward(270);
+                    RotateZ(null, 270);
                     setTimeout(function () {
-                        RotateZ(null, 270);
+                        forward(270);
                     }, 1000);
                     break;
                 case 'mov-top':
                     RotateZ(null, 0);
                     setTimeout(function () {
-                        resMsg = forward(0);
+                        forward(0);
                     }, 1000);
                     break;
                 case 'mov-rig':
-                    resMsg = forward(90);
+                    RotateZ(null, 90);
                     setTimeout(function () {
-                        RotateZ(null, 90);
+                        resMsg = forward(90);
                     }, 1000);
                     break;
                 case 'mov-bot':
-                    resMsg = forward(180);
+                    RotateZ(null, 180);
                     setTimeout(function () {
-                        RotateZ(null, 180);
+                        resMsg = forward(180);
                     }, 1000);
                     break;
                 default:
