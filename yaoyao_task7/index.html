@@ -1,0 +1,192 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>排序表格组件</title>
+</head>
+<style>
+    tbody,
+    tr,
+    th,
+    td {
+        padding: 0;
+        margin: 0;
+    }
+    
+    #table {
+        margin: 50px;
+        background-color: #fff;
+        text-align: center;
+    }
+    
+    #table thead th {
+        background-color: #333;
+        color: #fff;
+        border-right: 1px solid #999;
+    }
+    
+    #table td {
+        border-width: 0 1px 1px 0;
+        border-style: solid;
+        border-color: #999;
+    }
+    
+    #table td:first-child {
+        border-left: 1px solid #999;
+    }
+    
+    #table thead th,
+    #table tbody td {
+        height: 40px;
+        width: 100px;
+        box-sizing: border-box;
+    }
+    
+    .sortable {
+        position: relative;
+    }
+    
+    .sortable .up-arrow {
+        display: block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 5px 8px 5px;
+        border-color: transparent transparent #fff transparent;
+        position: absolute;
+        top: 8px;
+        right: 10px;
+    }
+    
+    .sortable .down-arrow {
+        display: block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: #fff transparent transparent transparent;
+        position: absolute;
+        right: 10px;
+        bottom: 8px;
+    }
+    
+    .sortable .active:first-child {
+        border-color: transparent transparent #999 transparent;
+    }
+    
+    .sortable .active:not(:first-child) {
+        border-color: #999 transparent transparent transparent;
+    }
+</style>
+
+<body>
+    <table id="table" cellspacing="0">
+        <thead>
+            <tr>
+                <th prop="name">姓名</th>
+                <th prop="YuWen" sortable>语文</th>
+                <th prop="ShuXue" sortable>数学</th>
+                <th prop="English">英语</th>
+                <th prop="total">总分</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</body>
+<script>
+    let originData = [{
+        name: '小明',
+        ShuXue: 90,
+        YuWen: 80,
+        English: 70,
+        total: 240
+    }, {
+        name: '小红',
+        YuWen: 90,
+        ShuXue: 60,
+        English: 90,
+        total: 240
+    }, {
+        name: '小亮',
+        YuWen: 60,
+        ShuXue: 100,
+        English: 70,
+        total: 230
+    }];
+
+    const ths = Array.from(document.getElementsByTagName('th'));
+
+    function sortData(data, prop, order) {
+        if (order === 'default') {
+            return data;
+        } else {
+            let sortedArr = data.slice(0).sort((a, b) => {
+                if (order === 'asc') {
+                    return a[prop] - b[prop];
+                } else {
+                    return b[prop] - a[prop];
+                }
+            });
+            return sortedArr;
+        }
+    }
+
+    function renderTable(data) {
+        let tableBody = document.querySelector('#table tbody');
+        tableBody.innerHTML = '';
+        for (let row of data) {
+            let trHtml = `<tr>`;
+            for (let th of ths) {
+                let prop = th.getAttribute('prop');
+                trHtml += `<td>` + row[prop] + `</td>`;
+            }
+            tableBody.innerHTML += trHtml + `</tr>`;
+        }
+    }
+
+    function addArrow(th) {
+        if (th.hasAttribute('sortable')) {
+            th.className += 'sortable';
+            let upArrow = document.createElement('i');
+            upArrow.className = 'up-arrow';
+            th.appendChild(upArrow);
+            let downArrow = document.createElement('i');
+            downArrow.className = 'down-arrow';
+            th.appendChild(downArrow);
+        }
+    }
+
+    function addSortEvent(th) {
+        if (th.hasAttribute('sortable')) {
+            th.setAttribute('data-order', 'default');
+            th.addEventListener('click', (event) => {
+                const orders = ['asc', 'desc', 'default'];
+                const targetEle = event.currentTarget;
+                let oldOrder = targetEle.getAttribute('data-order');
+                let oldIndex = orders.indexOf(oldOrder);
+                currentIndex = (oldIndex + 1) % 3;
+                targetEle.setAttribute('data-order', orders[currentIndex]);
+                arrows = targetEle.children;
+                for (let arrow of arrows) {
+                    arrow.className = arrow.className.replace(' active', '');
+                }
+                if (currentIndex < 2) {
+                    arrows[currentIndex].className += ' active'
+                }
+                renderTable(sortData(originData, th.getAttribute('prop'), orders[currentIndex]));
+            });
+        }
+    }
+
+    window.onload = function() {
+        renderTable(originData);
+        for (let th of ths) {
+            addArrow(th);
+            addSortEvent(th);
+        }
+    }
+</script>
+
+</html>

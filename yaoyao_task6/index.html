@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浮出层组件</title>
+</head>
+<style>
+    body,
+    h4 {
+        padding: 0;
+        margin: 0;
+    }
+    
+    body {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .modal-wrapper {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 30;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    
+    .modal {
+        border: 1px solid #ccc;
+        width: 500px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background-color: #fff;
+    }
+    
+    .modal-header {
+        padding-left: 20px;
+        height: 40px;
+        background-color: #333;
+        color: #fff;
+        line-height: 40px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-footer {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .modal-footer button {
+        width: 60px;
+        height: 30px;
+        line-height: 30px;
+    }
+    
+    .hidden {
+        display: none;
+    }
+</style>
+
+<body>
+    <button onclick="btnClick()">弹窗</button>
+    <div class="modal-wrapper hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h4>这是浮出层标题</h4>
+            </div>
+            <div class="modal-body">
+                这是浮出层的内容 这是浮出层的内容
+                <br> 这是浮出层的内容 这是浮出层的内容
+            </div>
+            <div class="modal-footer">
+                <button class="modal-promise">确定</button>
+                <button class="modal-cancel">取消</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function initModal(options) {
+        var wrapper = document.querySelector('.modal-wrapper');
+
+        function showDialog() {
+            wrapper.className = 'modal-wrapper';
+        }
+
+        function hideDialog() {
+            wrapper.className = 'modal-wrapper hidden';
+        }
+
+        if (options.promiseCall) {
+            document.querySelector('.modal-wrapper .modal-promise').addEventListener('click', function() {
+                options.promiseCall();
+                hideDialog();
+            });
+        } else {
+            document.querySelector('.modal-wrapper .modal-promise').addEventListener('click', function() {
+                hideDialog();
+            });
+        }
+
+        if (options.cancelCall) {
+            document.querySelector('.modal-wrapper .modal-cancel').addEventListener('click', function() {
+                options.cancelCall();
+                hideDialog();
+            });
+        } else {
+            document.querySelector('.modal-wrapper .modal-cancel').addEventListener('click', function() {
+                hideDialog();
+            });
+        }
+
+        document.querySelector('.modal-wrapper').addEventListener('click', function(event) {
+            if (event.target.className === 'modal-wrapper') {
+                document.querySelector('.modal-wrapper').className = 'modal-wrapper hidden';
+            }
+        });
+
+        if (options.title) {
+            document.querySelector('.modal-wrapper .modal-header').innerHTML = options.title;
+        }
+        return {
+            show: showDialog,
+            hide: hideDialog
+        };
+    }
+    var modal = initModal({
+        title: '新的标题',
+        promiseCall: function() {
+            alert('点击了确定');
+        },
+        cancelCall: function() {
+            alert('点击了取消');
+        }
+    });
+
+    function btnClick() {
+        modal.show();
+    }
+</script>
+
+</html>
